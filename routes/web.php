@@ -25,6 +25,8 @@ Route::get('/', function () {
         // $product->save();
 
     // associates product to category and appends it in category_product table
+        // $category = Category::find(1);
+
         // $product->categories()->attach($category);
 
     
