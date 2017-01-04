@@ -64,6 +64,28 @@ Route::get('/', function () {
         // $category = Category::find(1);
 
         // $category->products()->sync([4, 5]);
+    
+    // Toggle visible in pivot table
+        
+        $product = Product::find(1);
+        $category = Category::find(1);
+
+        if(!$product->categories->find($category->id))
+        {
+            // Visible is false
+            $product->categories()
+                    ->orWherePivot('visible', false)
+                    ->updateExistingPivot($category->id, [
+                    'visible' => true
+            ]);
+        } else
+        {
+            // Visible is true
+            $product->categories()
+                    ->updateExistingPivot($category->id, [
+                    'visible' => false
+            ]);
+        }
 });
 
 Auth::routes();
